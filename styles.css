@@ -18,6 +18,11 @@ body {
 .key {
     height: calc(var(--width) * 4);
     width: var(--width);
+    color: rgb(246, 78, 168);
+    padding: 10px;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
 }
 
 .white {
