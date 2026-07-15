@@ -14,10 +14,36 @@ const NOTE_DETAILS = [
 ]
 
 document.addEventListener('keydown', e=> {
-    console.log('down')
-    console.log(e)
+    if (e.repeat) return
+
+    const keyboardKey = e.code
+    const noteDetail = getNoteDetail(keyboardKey)
+
+    if (noteDetail == null) return
+
+    noteDetail.active = true 
+    playNotes()
 })
 
 document.addEventListener('keyup', e=> {
-    console.log('up')
+    const keyboardKey = e.code
+    const noteDetail = getNoteDetail(keyboardKey)
+
+    if (noteDetail == null) return
+
+    noteDetail.active = false
+    playNotes()
 })
+
+const getNoteDetail = (keyboardKey) => {
+    return NOTE_DETAILS.find(n => `Key${n.key}` === keyboardKey)
+}
+
+const playNotes = () => {
+    NOTE_DETAILS.forEach(n => {
+        const keyElement = document.querySelector(`[data-note="${n.note}"]`)
+        console.log(keyElement)
+        keyElement.classList.toggle('active', n.active || false)
+    })   
+    
+}
